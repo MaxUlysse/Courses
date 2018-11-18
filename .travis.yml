@@ -1,0 +1,19 @@
+sudo: required
+language: java
+jdk: openjdk8
+services: docker
+
+env:
+  - NXF_VER=18.10.1
+  - NXF_VER=''
+
+before_install:
+  - docker pull maxulysse/compile-latex:2.0
+
+install:
+  - curl -fsSL get.nextflow.io | bash
+  - chmod +x nextflow
+  - sudo mv nextflow /usr/local/bin/
+
+script:
+  - nextflow run MaxUlysse/compile-latex --tex "*/*.tex" --outDir . -tag dev
